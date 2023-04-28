@@ -72,6 +72,6 @@ public class MyAccountStepdefs {
 
     @Then("je verifie que la creation du compte a echouee")
     public void jeVerifieQueLaCreationDuCompteAEchouee() {
-        myAccountPage.verifierMessageErreurMotDePasseNonConforme();
+        myAccountPage.verifierMotDePasseNonConforme();
     }
 }

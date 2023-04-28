@@ -23,6 +23,7 @@ public class MyAccountPage {
     By champMotDePasseResgisterBy = By.cssSelector("#reg_password");
     By boutonRegisterBy = By.cssSelector("[name='register']");
     By messageErreurMotDePasseNonConformeBy = By.cssSelector(".woocommerce-password-hint");
+    By messageHelloBy = By.cssSelector(".woocommerce-MyAccount-content p");
 
     public MyAccountPage(WebDriver driver) {
         this.driver = driver;
@@ -47,7 +48,6 @@ public class MyAccountPage {
     }
 
     public void verifierMailRegisterSaisi(String mailAttendu) {
-        setTemporisation(5000);
         String mailActuel = driver.findElement(champMailResgisterBy).getAttribute("value");
         Assert.assertEquals("Le mail '" + mailAttendu + "' n'est pas saisi dans le champ", mailAttendu, mailActuel);
     }
@@ -69,11 +69,11 @@ public class MyAccountPage {
         driver.findElement(boutonRegisterBy).click();
     }
 
-    public void verifierMessageErreurMotDePasseNonConforme() {
+    public void verifierMotDePasseNonConforme() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
-        wait.until(ExpectedConditions.presenceOfElementLocated(messageErreurMotDePasseNonConformeBy));
-        String messageErreurActuel = driver.findElement(messageErreurMotDePasseNonConformeBy).getText();
-        Assert.assertEquals("Le systeme valide la création des comptes avec des mots de passe non conforme", messageErreurMotDePasseNonConformeBy, messageErreurActuel);
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageHelloBy));
+        String messageHello = driver.findElement(messageHelloBy).getText();
+        Assert.assertFalse("Le systeme valide la création des comptes avec des mots de passe non conforme", messageHello.contains("Hello"));
     }
 
     public void verifierMotDePasseConforme(String motDePasse) {
