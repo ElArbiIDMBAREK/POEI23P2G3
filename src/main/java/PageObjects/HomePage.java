@@ -1,24 +1,29 @@
 package PageObjects;
 
-import Hooks.Hooks;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
 
-    private WebDriver driver = Hooks.driver;
+    static final int TIMEOUT_SIDE_PANEL = 5;
+
+    WebDriver driver;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+    }
 
     By boutonMyAccountBy = By.cssSelector("#menu-item-50");
-    By titreRegisterBy = By.cssSelector(".u-column2.col-2");
 
     public void accederMyAccount() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonMyAccountBy));
         driver.findElement(boutonMyAccountBy).click();
-    }
-    public void verifierLaPresenceDeRigiterSurMyAccount(String titreRegisterAttendu) {
-        String titreRegisterActuel = driver.findElement(titreRegisterBy).getText();
-        System.out.println(titreRegisterActuel);
-        Assert.assertEquals("Le pavé 'Regsiter' n'est pas présent sur la page 'My Account'", titreRegisterAttendu, titreRegisterActuel);
     }
 
 }
