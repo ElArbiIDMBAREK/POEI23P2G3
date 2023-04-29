@@ -81,6 +81,13 @@ public class MyAccountPage {
         Assert.assertTrue("Le mot de passe '" + motDePasse + "' n'est pas conforme", critereMotDePasse.matches(motDePasse));
     }
 
+    public void verifierCompteCree() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageHelloBy));
+        String messageHello = driver.findElement(messageHelloBy).getText();
+        Assert.assertTrue("Le compte n'a pas été créé", messageHello.contains("Hello"));
+    }
+
     public void setTemporisation(int time) {
         try {
             Thread.sleep(time);

@@ -68,7 +68,7 @@ Feature: Création de compte
 		When je saisis un "<mail>" dans le champ Mail
 		And je saisis un "<motDePasse>" dans le champ Mot De Passe
 		And je clique sur le bouton REGISTER
-		Then je verifie que le compte "<mail>" et "<motDePasse>" est cree
+		Then je verifie que le compte est cree
 		
 		Examples:
 		| mail                 | motDePasse     |
