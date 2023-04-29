@@ -74,4 +74,9 @@ public class MyAccountStepdefs {
     public void jeVerifieQueLaCreationDuCompteAEchouee() {
         myAccountPage.verifierMotDePasseNonConforme();
     }
+
+    @Then("je verifie que le compte est cree")
+    public void jeVerifieQueLeCompteEstCree() {
+        myAccountPage.verifierCompteCree();
+    }
 }
