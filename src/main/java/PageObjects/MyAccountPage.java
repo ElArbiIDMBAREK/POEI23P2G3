@@ -2,15 +2,18 @@ package PageObjects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
 import java.time.Duration;
 
 public class MyAccountPage {
 
-    static final int TIMEOUT_SIDE_PANEL = 5;
+    static final int TEMPS_ATTENTE = 5;
 
     static final String messageErreurMotDePasseNonConforme
             =   "The password should be at least seven characters long. To make it stronger, " +
@@ -18,31 +21,59 @@ public class MyAccountPage {
 
     WebDriver driver;
 
+    /**
+     * Définition des Sélecteurs
+     */
     By paveRegisterBy = By.cssSelector(".register");
     By champMailResgisterBy = By.cssSelector("#reg_email");
     By champMotDePasseResgisterBy = By.cssSelector("#reg_password");
     By boutonRegisterBy = By.cssSelector("[name='register']");
     By messageErreurMotDePasseNonConformeBy = By.cssSelector(".woocommerce-password-hint");
     By messageHelloBy = By.cssSelector(".woocommerce-MyAccount-content p");
+    By boutonLogoutBy = By.cssSelector(".woocommerce-MyAccount-navigation-link--customer-logout a");
+    By messageErreurMailDejaUtiliseBy = By.cssSelector(".woocommerce-error li");
 
+    /**
+     * Constructeur de la page d'accueil "Home Page"
+     * @param driver
+     */
     public MyAccountPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void verifierPresencePaveRigiterMyAccount() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
-        wait.until(ExpectedConditions.presenceOfElementLocated(paveRegisterBy));
-        Assert.assertTrue("Le pavé 'Regsiter' n'est pas présent sur la page 'My Account'", driver.findElement(paveRegisterBy).isDisplayed());
+    /**
+     * Cliquer quelque part sur la page pour corriger quelques défauts du site
+     * Quelques pages du site désactivent quelques boutons
+     */
+    public void cliquer() {
+        Actions actions = new Actions(driver);
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
+        robot.mouseMove(50,50);
+        actions.click().build().perform();
+    }
+
+    /**
+     * Vérifier la présence du pavé "Register"
+     */
+    public void verifierPresencePaveRegister() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));                                      // Définition d'un "Wait"
+        wait.until(ExpectedConditions.presenceOfElementLocated(paveRegisterBy));                                                // Attendre que le pavé "Register" soit présent
+        Assert.assertTrue("Le pavé 'Regsiter' n'est pas présent", driver.findElement(paveRegisterBy).isDisplayed());    // Vérifier si le pavé "Register" est présent
     }
 
     public void entrerMailRegister(String mail) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMailResgisterBy));
         driver.findElement(champMailResgisterBy).sendKeys(mail);
     }
 
     public void entrerMotDePasseRegister(String motDePasse) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMotDePasseResgisterBy));
         driver.findElement(champMotDePasseResgisterBy).sendKeys(motDePasse);
     }
@@ -58,19 +89,20 @@ public class MyAccountPage {
     }
 
     public void verifierPresenceBoutonRegister() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonRegisterBy));
         Assert.assertTrue("Le bouton Register n'existe pas", driver.findElement(boutonRegisterBy).isDisplayed());
     }
 
     public void cliquerBoutonRegister() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonRegisterBy));
         driver.findElement(boutonRegisterBy).click();
     }
 
     public void verifierMotDePasseNonConforme() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(messageHelloBy));
         String messageHello = driver.findElement(messageHelloBy).getText();
         Assert.assertFalse("Le systeme valide la création des comptes avec des mots de passe non conforme", messageHello.contains("Hello"));
@@ -82,10 +114,24 @@ public class MyAccountPage {
     }
 
     public void verifierCompteCree() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SIDE_PANEL));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(messageHelloBy));
         String messageHello = driver.findElement(messageHelloBy).getText();
         Assert.assertTrue("Le compte n'a pas été créé", messageHello.contains("Hello"));
+    }
+
+    public void cliquerBoutonLogout() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonLogoutBy));
+        driver.findElement(boutonLogoutBy).click();
+    }
+
+    public void verifierPresenceMessageErreurMailDejaUtilise(String messageErreurAttendu) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageErreurMailDejaUtiliseBy));
+        String messageErreurActuel = driver.findElement(messageErreurMailDejaUtiliseBy).getText();
+        Assert.assertEquals("Le message d'erreur n'existe pas. Le système crée des comtes avec des mails en doublon", messageErreurAttendu, messageErreurActuel);
+
     }
 
     public void setTemporisation(int time) {

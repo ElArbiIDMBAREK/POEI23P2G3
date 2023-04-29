@@ -6,6 +6,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 public class MyAccountStepdefs {
@@ -20,19 +21,25 @@ public class MyAccountStepdefs {
     public void jeSuisSurLeEspaceMyAccount() {
         hooks.accederSite();
         homePage.accederMyAccount();
+        homePage.fermerPublicationGoogle();
     }
 
     @Then("je verifie que le pave Register est present sur le espace My Account")
     public void jeVerifieQueLePaveRegisterEstPresentSurLeEspaceMyAccount() {
         homePage.accederMyAccount();
-        myAccountPage.verifierPresencePaveRigiterMyAccount();
+        homePage.fermerPublicationGoogle();
+        myAccountPage.verifierPresencePaveRegister();
     }
 
     @When("je saisis un {string} dans le champ Nom")
-    public void jeSaisisUnDansLeChampNom(String nom) {}
+    public void jeSaisisUnDansLeChampNom(String nom) {
+        Assert.assertTrue("Le champ 'Nom' n'existe pas !",false);
+    }
 
     @And("je saisis un {string} dans le champ Prenom")
-    public void jeSaisisUnDansLeChampPrenom(String prenom) {}
+    public void jeSaisisUnDansLeChampPrenom(String prenom) {
+        Assert.assertTrue("Le champ 'Prénom' n'existe pas !",false);
+    }
 
     @And("je saisis un {string} dans le champ Mail")
     public void jeSaisisUnDansLeChampMail(String mail) {
@@ -45,10 +52,14 @@ public class MyAccountStepdefs {
     }
 
     @Then("je verifie que le {string} est saisi dans le champ Nom")
-    public void jeVerifieQueLeEstSaisiDansLeChampNom(String nom) {}
+    public void jeVerifieQueLeEstSaisiDansLeChampNom(String nom) {
+        Assert.assertTrue("Le champ 'Nom' n'existe pas !",false);
+    }
 
     @And("je verifie que le {string} est saisi dans le champ Prenom")
-    public void jeVerifieQueLeEstSaisiDansLeChampPrenom(String prenom) {}
+    public void jeVerifieQueLeEstSaisiDansLeChampPrenom(String prenom) {
+        Assert.assertTrue("Le champ 'Prénom' n'existe pas !",false);
+    }
 
     @And("je verifie que le {string} est saisi dans le champ Mail")
     public void jeVerifieQueLeEstSaisiDansLeChampMail(String mail) {
@@ -79,4 +90,21 @@ public class MyAccountStepdefs {
     public void jeVerifieQueLeCompteEstCree() {
         myAccountPage.verifierCompteCree();
     }
+
+    @And("je me deconnecte")
+    public void jeMeDeconnecte() {
+        myAccountPage.cliquerBoutonLogout();
+    }
+
+    @Then("je verifie que le compte ne pas ete cree")
+    public void jeVerifieQueLeCompteNePasEteCree() {
+        myAccountPage.verifierPresencePaveRegister();
+    }
+
+    @And("je verifie que le {string} se affiche")
+    public void jeVerifieQueLeSeAffiche(String messageErreur) {
+        myAccountPage.verifierPresenceMessageErreurMailDejaUtilise(messageErreur);
+    }
+
+
 }
