@@ -94,9 +94,9 @@ public class MyAccountStepdefs {
         myAccountPage.verifierPresencePaveRegister();
     }
 
-    @And("je verifie que le {string} se affiche")
-    public void jeVerifieQueLeSeAffiche(String messageErreur) {
-        myAccountPage.verifierPresenceMessageErreur(messageErreur);
+    @And("je verifie que le {string} de erreur se affiche")
+    public void jeVerifieQueLeDeErreurSeAffiche(String message) {
+        myAccountPage.verifierPresenceMessageErreur(message);
     }
 
     @Then("je verifie que je suis sur le espace My Account")

@@ -1,5 +1,6 @@
 package PageObjects;
 
+import Stepdefs.Hooks;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,22 +45,6 @@ public class MyAccountPage {
     }
 
     /**
-     * Cliquer quelque part sur la page pour corriger quelques défauts du site
-     * Quelques pages du site désactivent quelques boutons
-     */
-    public void cliquer() {
-        Actions actions = new Actions(driver);
-        Robot robot = null;
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            throw new RuntimeException(e);
-        }
-        robot.mouseMove(50,50);
-        actions.click().build().perform();
-    }
-
-    /**
      * Vérifier la présence du pavé "Register"
      */
     public void verifierPresencePaveRegister() {
@@ -97,7 +82,7 @@ public class MyAccountPage {
     }
 
     public void cliquerBoutonRegister() {
-        cliquer();
+        Hooks.cliquer();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonRegisterBy));
         driver.findElement(boutonRegisterBy).click();
@@ -140,25 +125,17 @@ public class MyAccountPage {
     }
 
     public void cocherCaseRememberMe() {
-        cliquer();
+        Hooks.cliquer();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(caseRememberMeBy));
         driver.findElement(caseRememberMeBy).click();
     }
 
     public void cliquerBoutonLogin() {
-        cliquer();
+        Hooks.cliquer();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonLoginBy));
         driver.findElement(boutonLoginBy).click();
-    }
-
-    public void setTemporisation(int time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

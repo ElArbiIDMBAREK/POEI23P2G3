@@ -4,6 +4,7 @@ import PageObjects.DashboardPage;
 import PageObjects.MyAccountPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 
 public class DashboardStepdefs {
@@ -63,5 +64,15 @@ public class DashboardStepdefs {
     public void jeVerifieQueLeLienLogoutRenvoieASaPage() {
         dashboardPage.cliquerBoutonLogout();
         myAccountPage.verifierPresencePaveRegister();
+    }
+
+    @When("je accede a la page Account Details")
+    public void jeAccedeALaPageAccountDetails() {
+        dashboardPage.cliquerBoutonAccountDetails();
+    }
+
+    @Then("je verifie que le {string} se affiche")
+    public void jeVerifieQueLeSeAffiche(String message) {
+        dashboardPage.verifierPresenceMessage(message);
     }
 }

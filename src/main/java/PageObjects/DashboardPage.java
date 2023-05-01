@@ -18,6 +18,7 @@ public class DashboardPage {
      * Définition des Sélecteurs
      */
     By messageHelloBy = By.cssSelector(".woocommerce-MyAccount-content p");
+    By messageBy = By.cssSelector(".woocommerce-message");
     By boutonDashbordBy = By.cssSelector(".woocommerce-MyAccount-navigation-link--dashboard a");
     By boutonOrdersBy = By.cssSelector(".woocommerce-MyAccount-navigation-link--orders a");
     By boutonDownloadsdBy = By.cssSelector(".woocommerce-MyAccount-navigation-link--downloads a");
@@ -106,6 +107,13 @@ public class DashboardPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonLogoutBy));
         Assert.assertTrue("Le lien Dashboard n'existe pas", driver.findElement(boutonLogoutBy).isDisplayed());
+    }
+
+    public void verifierPresenceMessage(String messageAttendu) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageBy));
+        String messageActuel = driver.findElement(messageBy).getText();
+        Assert.assertTrue("Le message n'apparaît pas", messageActuel.contains(messageAttendu));
     }
 
 }
