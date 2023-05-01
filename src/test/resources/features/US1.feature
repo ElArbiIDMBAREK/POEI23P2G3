@@ -81,10 +81,10 @@ Feature: Création de compte
 		And je saisis un "<motDePasse>" dans le champ Register Mot De Passe
 		And je clique sur le bouton REGISTER
 		Then je verifie que je suis sur le espace My Account
-		And je verifie que le "<messageErreur>" se affiche
+		And je verifie que le "<message>" de erreur se affiche
 		
 		Examples:
-		| mail                    | motDePasse     | messageErreur                                                                  |
+		| mail                    | motDePasse     | message                                                                        |
 		| poei23p2g3.38@gmail.com | Projet2Groupe3 | Error: An account is already registered with your email address. Please login. |
 
 	@TEST_POEI23P2G3-108 @TNR

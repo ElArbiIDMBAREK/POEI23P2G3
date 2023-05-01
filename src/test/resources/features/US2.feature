@@ -75,10 +75,10 @@ Feature: Connexion à un compte
 	Scenario Outline: Valider que le message d’erreur ERROR: The password you entered for the username <Email> incorrect s’affiche en cas de mot de passe erroné
 		Given je suis sur le espace My Account
 		When je me connecte avec le "<login>" et le "<motDePasse>"
-		Then je verifie que le "<messageErreur>" se affiche
+		Then je verifie que le "<message>" de erreur se affiche
 		
 		Examples:
-		| login                       | motDePasse | messageErreur                                                                              |
+		| login                       | motDePasse | message	                                                                                |
 		| poei23p2g3.elarbi@gmail.com | XXXXXXXX   | Error: the password you entered for the username poei23p2g3.elarbi@gmail.com is incorrect. |
 
 	@TEST_POEI23P2G3-56 @TNR
