@@ -1,5 +1,6 @@
 package Stepdefs;
 
+import PageObjects.DashboardPage;
 import PageObjects.HomePage;
 import PageObjects.MyAccountPage;
 import cucumber.api.java.en.And;
@@ -24,50 +25,52 @@ public class MyAccountStepdefs {
         homePage.fermerPublicationGoogle();
     }
 
-    @Then("je verifie que le pave Register est present sur le espace My Account")
-    public void jeVerifieQueLePaveRegisterEstPresentSurLeEspaceMyAccount() {
+    @Then("je verifie que le pave Register est present")
+    public void jeVerifieQueLePaveRegisterEstPresent() {
         homePage.accederMyAccount();
         homePage.fermerPublicationGoogle();
         myAccountPage.verifierPresencePaveRegister();
     }
 
-    @When("je saisis un {string} dans le champ Nom")
-    public void jeSaisisUnDansLeChampNom(String nom) {
+    @When("je saisis un {string} dans le champ Register Nom")
+    public void jeSaisisUnDansLeChampRegisterNom(String nom) {
+        homePage.accederMyAccount();
         Assert.assertTrue("Le champ 'Nom' n'existe pas !",false);
     }
 
-    @And("je saisis un {string} dans le champ Prenom")
-    public void jeSaisisUnDansLeChampPrenom(String prenom) {
+    @And("je saisis un {string} dans le champ Register Prenom")
+    public void jeSaisisUnDansLeChampRegisterPrenom(String prenom) {
+        homePage.accederMyAccount();
         Assert.assertTrue("Le champ 'Prénom' n'existe pas !",false);
     }
 
-    @And("je saisis un {string} dans le champ Mail")
-    public void jeSaisisUnDansLeChampMail(String mail) {
+    @And("je saisis un {string} dans le champ Register Mail")
+    public void jeSaisisUnDansLeChampRegisterMail(String mail) {
         myAccountPage.entrerMailRegister(mail);
     }
 
-    @And("je saisis un {string} dans le champ Mot De Passe")
-    public void jeSaisisUnDansLeChampMotDePasse(String motDePasse) {
+    @And("je saisis un {string} dans le champ Register Mot De Passe")
+    public void jeSaisisUnDansLeChampMotRegisterDePasse(String motDePasse) {
         myAccountPage.entrerMotDePasseRegister(motDePasse);
     }
 
-    @Then("je verifie que le {string} est saisi dans le champ Nom")
-    public void jeVerifieQueLeEstSaisiDansLeChampNom(String nom) {
+    @Then("je verifie que le {string} est saisi dans le champ Register Nom")
+    public void jeVerifieQueLeEstSaisiDansLeChampRegisterNom(String nom) {
         Assert.assertTrue("Le champ 'Nom' n'existe pas !",false);
     }
 
-    @And("je verifie que le {string} est saisi dans le champ Prenom")
-    public void jeVerifieQueLeEstSaisiDansLeChampPrenom(String prenom) {
+    @And("je verifie que le {string} est saisi dans le champ Register Prenom")
+    public void jeVerifieQueLeEstSaisiDansLeChampRegisterPrenom(String prenom) {
         Assert.assertTrue("Le champ 'Prénom' n'existe pas !",false);
     }
 
-    @And("je verifie que le {string} est saisi dans le champ Mail")
-    public void jeVerifieQueLeEstSaisiDansLeChampMail(String mail) {
+    @And("je verifie que le {string} est saisi dans le champ Register Mail")
+    public void jeVerifieQueLeEstSaisiDansLeChampRegisterMail(String mail) {
         myAccountPage.verifierMailRegisterSaisi(mail);
     }
 
-    @And("je verifie que le {string} est saisi dans le champ Mot De Passe")
-    public void jeVerifieQueLeEstSaisiDansLeChampMotDePasse(String motDePasse) {
+    @And("je verifie que le {string} est saisi dans le champ Register Mot De Passe")
+    public void jeVerifieQueLeEstSaisiDansLeChampRegisterMotDePasse(String motDePasse) {
         myAccountPage.verifierMotDePasseRegisterSaisi(motDePasse);
     }
 
@@ -86,16 +89,6 @@ public class MyAccountStepdefs {
         myAccountPage.verifierMotDePasseNonConforme();
     }
 
-    @Then("je verifie que le compte est cree")
-    public void jeVerifieQueLeCompteEstCree() {
-        myAccountPage.verifierCompteCree();
-    }
-
-    @And("je me deconnecte")
-    public void jeMeDeconnecte() {
-        myAccountPage.cliquerBoutonLogout();
-    }
-
     @Then("je verifie que le compte ne pas ete cree")
     public void jeVerifieQueLeCompteNePasEteCree() {
         myAccountPage.verifierPresencePaveRegister();
@@ -103,8 +96,43 @@ public class MyAccountStepdefs {
 
     @And("je verifie que le {string} se affiche")
     public void jeVerifieQueLeSeAffiche(String messageErreur) {
-        myAccountPage.verifierPresenceMessageErreurMailDejaUtilise(messageErreur);
+        myAccountPage.verifierPresenceMessageErreur(messageErreur);
     }
 
+    @Then("je verifie que je suis sur le espace My Account")
+    public void jeVerifieQueJeSuisSurLeEspaceMyAccount() {
+        myAccountPage.verifierPresencePaveRegister();
+    }
 
+    @When("je saisis un {string} dans le champ Login")
+    public void jeSaisisUnDansLeChampLogin(String login) {
+        myAccountPage.entrerMailLogin(login);
+    }
+
+    @And("je saisis un {string} dans le champ Login Mot De Passe")
+    public void jeSaisisUnDansLeChampLoginMotDePasse(String motDePasse) {
+        myAccountPage.entrerMotDePasseLogin(motDePasse);
+    }
+
+    @And("je clique sur le bouton LOGIN")
+    public void jeCliqueSurLeBoutonLOGIN() {
+        myAccountPage.cliquerBoutonLogin();
+    }
+
+    @When("je me connecte avec le {string} et le {string}")
+    public void jeMeConnecteAvecLeEtLe(String login, String motDePasse) {
+        myAccountPage.entrerMailLogin(login);
+        myAccountPage.entrerMotDePasseLogin(motDePasse);
+        myAccountPage.cliquerBoutonLogin();
+    }
+
+    @When("je coche la case Remember Me")
+    public void jeCocheLaCaseRememberMe() {
+        myAccountPage.cocherCaseRememberMe();
+    }
+
+    @Then("je verifie que le {string} est saisi")
+    public void jeVerifieQueLeEstSaisi(String login) {
+        myAccountPage.verifierMailLoginSaisi(login);
+    }
 }

@@ -2,7 +2,6 @@ package PageObjects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,8 +29,11 @@ public class MyAccountPage {
     By boutonRegisterBy = By.cssSelector("[name='register']");
     By messageErreurMotDePasseNonConformeBy = By.cssSelector(".woocommerce-password-hint");
     By messageHelloBy = By.cssSelector(".woocommerce-MyAccount-content p");
-    By boutonLogoutBy = By.cssSelector(".woocommerce-MyAccount-navigation-link--customer-logout a");
-    By messageErreurMailDejaUtiliseBy = By.cssSelector(".woocommerce-error li");
+    By messageErreurBy = By.cssSelector(".woocommerce-error li");
+    By champMailLoginBy = By.cssSelector("#username");
+    By champMotDePasseLoginBy = By.cssSelector("#password");
+    By caseRememberMeBy = By.cssSelector("#rememberme");
+    By boutonLoginBy = By.cssSelector("[name='login']");
 
     /**
      * Constructeur de la page d'accueil "Home Page"
@@ -113,25 +115,42 @@ public class MyAccountPage {
         Assert.assertTrue("Le mot de passe '" + motDePasse + "' n'est pas conforme", critereMotDePasse.matches(motDePasse));
     }
 
-    public void verifierCompteCree() {
+    public void verifierPresenceMessageErreur(String messageErreurAttendu) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
-        wait.until(ExpectedConditions.presenceOfElementLocated(messageHelloBy));
-        String messageHello = driver.findElement(messageHelloBy).getText();
-        Assert.assertTrue("Le compte n'a pas été créé", messageHello.contains("Hello"));
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageErreurBy));
+        String messageErreurActuel = driver.findElement(messageErreurBy).getText();
+        Assert.assertTrue("Le message d'erreur n'apparaît pas", messageErreurActuel.contains(messageErreurAttendu));
     }
 
-    public void cliquerBoutonLogout() {
+    public void entrerMailLogin(String mail) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
-        wait.until(ExpectedConditions.elementToBeClickable(boutonLogoutBy));
-        driver.findElement(boutonLogoutBy).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(champMailLoginBy));
+        driver.findElement(champMailLoginBy).sendKeys(mail);
     }
 
-    public void verifierPresenceMessageErreurMailDejaUtilise(String messageErreurAttendu) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
-        wait.until(ExpectedConditions.presenceOfElementLocated(messageErreurMailDejaUtiliseBy));
-        String messageErreurActuel = driver.findElement(messageErreurMailDejaUtiliseBy).getText();
-        Assert.assertEquals("Le message d'erreur n'existe pas. Le système crée des comtes avec des mails en doublon", messageErreurAttendu, messageErreurActuel);
+    public void verifierMailLoginSaisi(String loginAttendu) {
+        String loginActuel = driver.findElement(champMailLoginBy).getAttribute("value");
+        Assert.assertEquals("Le login '" + loginAttendu + "' n'est pas saisi dans le champ", loginAttendu, loginActuel);
+    }
 
+    public void entrerMotDePasseLogin(String motDePasse) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(champMotDePasseLoginBy));
+        driver.findElement(champMotDePasseLoginBy).sendKeys(motDePasse);
+    }
+
+    public void cocherCaseRememberMe() {
+        cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(caseRememberMeBy));
+        driver.findElement(caseRememberMeBy).click();
+    }
+
+    public void cliquerBoutonLogin() {
+        cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonLoginBy));
+        driver.findElement(boutonLoginBy).click();
     }
 
     public void setTemporisation(int time) {
