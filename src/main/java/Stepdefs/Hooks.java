@@ -3,12 +3,15 @@ package Stepdefs;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 public class Hooks {
@@ -45,6 +48,10 @@ public class Hooks {
         }
         robot.mouseMove(50,50);
         actions.click().build().perform();
+    }
+
+    public static void scroll() {
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.END);
     }
 
     public static void setTemporisation(int time) {
