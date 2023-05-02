@@ -30,16 +30,13 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                    | motDePasse  |
-		| poei23p2g3.16@gmail.com | aqzsedrftgy |
+		| poei23p2g3.16.1@gmail.com | aqzsedrftgy |
 
 	@TEST_POEI23P2G3-24 @TNR
-	Scenario Outline: Valider que le pavé Register est présent sur l’espace My Account
-		When je entre le "<url>" dans la barre de recherche
+	Scenario: Valider que le pavé Register est présent sur l’espace My Account
+		Given je suis sur la page Home
+		When je clique sur le bouton My Account
 		Then je verifie que le pave Register est present
-		
-		Examples:
-		| url                                    |
-		| https://practice.automationtesting.in/ |
 
 	@TEST_POEI23P2G3-31 @TNR
 	Scenario Outline: Valider que l'utilisateur peut saisir son nom et son prénom dans les champs appropriés
@@ -68,7 +65,7 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                    | motDePasse     |
-		| poei23p2g3.34@gmail.com | Projet2Groupe3 |
+		| poei23p2g3.34.1@gmail.com | Projet2Groupe3 |
 
 	@TEST_POEI23P2G3-38 @TNR
 	Scenario Outline: Valider que le système détecte les doublons pour le mail et empêche la création de plusieurs comptes avec le même mail
@@ -85,7 +82,7 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                    | motDePasse     | message                                                                        |
-		| poei23p2g3.38@gmail.com | Projet2Groupe3 | Error: An account is already registered with your email address. Please login. |
+		| poei23p2g3.38.1@gmail.com | Projet2Groupe3 | Error: An account is already registered with your email address. Please login. |
 
 	@TEST_POEI23P2G3-108 @TNR
 	Scenario Outline: Valider que l'utilisateur peut saisir un mail et un mot de passe dans les champs appropriés
@@ -97,4 +94,4 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                     | motDePasse    	|
-		| poei23p2g3.108@gmail.com | Projet2Groupe3 |
+		| poei23p2g3.108.1@gmail.com | Projet2Groupe3 |
