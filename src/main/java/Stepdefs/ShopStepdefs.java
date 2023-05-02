@@ -52,11 +52,36 @@ public class ShopStepdefs {
     @When("je choisi le filtre {string}")
     public void jeChoisiLeFiltre(String filtre) {
         shopPage.choisirFiltre(filtre);
-        Hooks.setTemporisation(5000);
+        //Hooks.setTemporisation(5000);
     }
 
     @Then("je verifie que les articles sont tries par ce {string}")
     public void jeVerifieQueLesArticlesSontTriesParCe(String filtre) {
-        String prix = shopPage.getPrixArticle(0);
+        shopPage.articleFiltre(filtre);
+    }
+
+    @Then("je verifie que un article a une Photo")
+    public void jeVerifieQueUnArticleAUnePhoto() {
+        shopPage.verifierPresenceImageArticle(PREMIER_ARTICLE);
+    }
+
+    @And("je verifie que un article a un Libelle")
+    public void jeVerifieQueUnArticleAUnLibelle() {
+        shopPage.verifierPresenceLibelleArticle(PREMIER_ARTICLE);
+    }
+
+    @And("je verifie que un article a un Prix")
+    public void jeVerifieQueUnArticleAUnPrix() {
+        shopPage.verifierPresencePrixArticle(PREMIER_ARTICLE);
+    }
+
+    @And("je verifie que un article contient un lien")
+    public void jeVerifieQueUnArticleContientUnLien() {
+        shopPage.verifierPresenceLienArticle(PREMIER_ARTICLE);
+    }
+
+    @When("je clique sur le article {string}")
+    public void jeCliqueSurLeArticle(String indexArticle) {
+        shopPage.cliquerArticle(Integer.parseInt(indexArticle));
     }
 }

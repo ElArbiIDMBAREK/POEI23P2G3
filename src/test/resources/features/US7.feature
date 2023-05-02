@@ -62,7 +62,7 @@ Feature: Ajout des articles au panier
 		Examples:
 		| filtre                     |
 		| Sort by price: low to high |
-		#| Sort by price: high to low |
+		| Sort by price: high to low |
 
 	@TEST_POEI23P2G3-83 @TNR
 	Scenario Outline: Valider que le filtre permet d’affiner la vue des articles par thème
@@ -73,6 +73,7 @@ Feature: Ajout des articles au panier
 		Examples:
 		| filtre |
 		|        |
+
 	@TEST_POEI23P2G3-84 @TNR
 	Scenario: Valider la présence du lien qui redirige vers le détail de l’article et la présence des éléments  “Photo descriptive” “Libellé” et “Prix” au dessous de l’article
 		Given je suis sur la page Shop
