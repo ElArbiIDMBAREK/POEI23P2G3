@@ -25,11 +25,9 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
     }
 
-    public static void accederSite() {
+    public static void accederHome() {
         driver.get(URL);
     }
 

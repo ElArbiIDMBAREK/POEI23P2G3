@@ -1,5 +1,6 @@
 package PageObjects;
 
+import Stepdefs.Hooks;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,9 +18,13 @@ public class HomePage {
     /**
      * Définition des Sélecteurs
      */
-    By iFramePublicationGoogle = By.cssSelector("#google_esf");
-    By boutonCloseBy =By.cssSelector("#dismiss-button div");
+    By premierIFramePublicationGoogle = By.cssSelector("#google_esf");
+    By deuxiemeIFramePublicationGoogle = By.cssSelector("#aswift_7");
+    By troisiemeIFramePublicationGoogle = By.cssSelector("#ad_iframe");
+    By boutonCloseBy =By.cssSelector("#dismiss-button");
+    By boutonShopBy = By.cssSelector("#menu-item-40");
     By boutonMyAccountBy = By.cssSelector("#menu-item-50");
+    By iconePanierBy = By.cssSelector(".wpmenucart-icon-shopping-cart-0");
 
     /**
      * Constructeur de la page d'accueil "Home Page"
@@ -33,29 +38,40 @@ public class HomePage {
      * Fermer le pop-up des publicités de Google
      */
     public void fermerPublicationGoogle() {
-        /*
-        setTemporisation(1000);
-        driver.switchTo().frame(driver.findElement(iFramePublicationGoogle));
+        Hooks.setTemporisation(1000);
+        driver.switchTo().frame(driver.findElement(premierIFramePublicationGoogle));
+        driver.switchTo().frame(driver.findElement(deuxiemeIFramePublicationGoogle));
+        driver.switchTo().frame(driver.findElement(troisiemeIFramePublicationGoogle));
         driver.findElement(boutonCloseBy).click();
         driver.switchTo().defaultContent();
-        */
+        driver.switchTo().defaultContent();
+        driver.switchTo().defaultContent();
+    }
+
+    /**
+     * Cliquer sur le bouton "Shop" afin d'accéder à la page "Shop" pour se connceter ou créer nouveau un compte
+     */
+    public void accederShop() {
+        Hooks.cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonShopBy));
+        driver.findElement(boutonShopBy).click();
+        Hooks.setTemporisation(5000);
     }
 
     /**
      * Cliquer sur le bouton "My Account" afin d'accéder à la page "My Account" pour se connceter ou créer nouveau un compte
      */
     public void accederMyAccount() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));  // Définition d'un "Wait"
-        wait.until(ExpectedConditions.elementToBeClickable(boutonMyAccountBy));             // Attendre que le bouton "My Account" soit cliquable
-        driver.findElement(boutonMyAccountBy).click();                                      // Cliquer sur le bouton "My Account"
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonMyAccountBy));
+        driver.findElement(boutonMyAccountBy).click();
     }
 
-    public void setTemporisation(int time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void verifierPresenceIconePanier() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(iconePanierBy));
+        Assert.assertTrue("L'icone Panier n'est pas présente", driver.findElement(iconePanierBy).isDisplayed());
     }
 
 }

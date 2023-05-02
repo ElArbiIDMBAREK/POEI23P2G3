@@ -14,21 +14,20 @@ public class MyAccountStepdefs {
 
     WebDriver driver = Hooks.driver;
 
-    Hooks hooks = new Hooks();
     HomePage homePage = new HomePage(driver);
     MyAccountPage myAccountPage = new MyAccountPage(driver);
 
     @Given("je suis sur le espace My Account")
     public void jeSuisSurLeEspaceMyAccount() {
-        hooks.accederSite();
+        Hooks.accederHome();
         homePage.accederMyAccount();
-        homePage.fermerPublicationGoogle();
+        //homePage.fermerPublicationGoogle();
     }
 
     @Then("je verifie que le pave Register est present")
     public void jeVerifieQueLePaveRegisterEstPresent() {
         homePage.accederMyAccount();
-        homePage.fermerPublicationGoogle();
+        //homePage.fermerPublicationGoogle();
         myAccountPage.verifierPresencePaveRegister();
     }
 
