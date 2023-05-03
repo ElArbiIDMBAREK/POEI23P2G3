@@ -46,7 +46,7 @@ Feature:  Ré-initialisation du mot de passe
 	@TEST_POEI23P2G3-63 @TESTSET_POEI23P2G3-126 @TNR
 	Scenario Outline: Valider que la page de l’application permet à l’utilisateur de saisir un nouveau mot de passe et de re-confirmer son mot de passe
 		Given je suis sur le espace My Account
-		When je saisis un "<mail>" dans le champ Register Mail
+		When je saisis un "<login>" dans le champ Register Mail
 		And je saisis un "<motDePasse>" dans le champ Register Mot De Passe
 		And je clique sur le bouton REGISTER
 		Then je verifie que je suis sur la page Dashboard

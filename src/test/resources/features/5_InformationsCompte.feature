@@ -64,15 +64,15 @@ Feature: Informations du compte
 		Given je suis sur le espace My Account
 		And je me connecte avec le "<login>" et le "<motDePasse>"
 		When je accede a la page Account Details
-		And je saisi un "<motDePasse>" dans le champ Account Details Current Password
+		And je saisi un "<motDePasseActuel>" dans le champ Account Details Current Password
 		And je saisi un "<nouveauMotDePasse>" dans le champ Account Details New Password
 		And je saisi un "<nouveauMotDePasse>" dans le champ Account Details Confirm New Password
 		And je clique sur le bouton SAVE CHANGES
 		Then je verifie que le "<message>" de erreur se affiche
-		
+
 		Examples:
-		| login                       | motDePasse | nouveauMotDePasse | message                             |
-		| poei23p2g3.elarbi@gmail.com | XXXXXXXX   | Projet2Groupe3    | Your current password is incorrect. |
+			| login                       | motDePasse     | motDePasseActuel | nouveauMotDePasse | message                             |
+			| poei23p2g3.elarbi@gmail.com | Projet2Groupe3 | aqzsedrftgy         | Projet2Groupe3    | Your current password is incorrect. |
 	@TEST_POEI23P2G3-117 @TESTSET_POEI23P2G3-126 @TNR
 	Scenario Outline: Valider que le message “New passwords do not match” s’affiche si les deux nouveaux mots de passe ne correspondent pas
 		Given je suis sur le espace My Account
@@ -86,4 +86,4 @@ Feature: Informations du compte
 		
 		Examples:
 		| login                       | motDePasse     | nouveauMotDePasse | message                     |
-		| poei23p2g3.elarbi@gmail.com | Projet2Groupe3 | XXXXXXXX          | New passwords do not match. |
+		| poei23p2g3.elarbi@gmail.com | Projet2Groupe3 | aqzsedrftgy          | New passwords do not match. |

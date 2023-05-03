@@ -70,10 +70,12 @@ public class AccountDetailsPage {
     }
 
     public void cliquerBoutonSaveChanges() {
-        Hooks.cliquer();
+        Hooks.dezoomer(5);
+        Hooks.scroll();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
-        //wait.until(ExpectedConditions.elementToBeClickable(boutonSaveChangesBy));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonSaveChangesBy));
         driver.findElement(boutonSaveChangesBy).click();
+        Hooks.zoomer(5);
     }
 
     public void verifierMotDePasseSaisi(String motDePasseAttendu) {

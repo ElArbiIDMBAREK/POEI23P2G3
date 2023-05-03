@@ -18,10 +18,6 @@ public class HomePage {
     /**
      * Définition des Sélecteurs
      */
-    //By premierIFramePublicationGoogle = By.cssSelector("#google_esf");
-    By deuxiemeIFramePublicationGoogle = By.cssSelector("#aswift_7");
-    By troisiemeIFramePublicationGoogle = By.cssSelector("#ad_iframe");
-    By boutonCloseBy =By.cssSelector("#dismiss-button");
     By boutonShopBy = By.cssSelector("#menu-item-40");
     By boutonMyAccountBy = By.cssSelector("#menu-item-50");
     By iconePanierBy = By.cssSelector(".wpmenucart-icon-shopping-cart-0");
@@ -35,19 +31,6 @@ public class HomePage {
     }
 
     /**
-     * Fermer le pop-up des publicités de Google
-     */
-    public void fermerPublicationGoogle() {
-        Hooks.setTemporisation(1000);
-        //driver.switchTo().frame(driver.findElement(premierIFramePublicationGoogle));
-        driver.switchTo().frame(driver.findElement(deuxiemeIFramePublicationGoogle));
-        driver.switchTo().frame(driver.findElement(troisiemeIFramePublicationGoogle));
-        driver.findElement(boutonCloseBy).click();
-        driver.switchTo().defaultContent();
-        Hooks.setTemporisation(1000);
-    }
-
-    /**
      * Cliquer sur le bouton "Shop" afin d'accéder à la page "Shop" pour se connceter ou créer nouveau un compte
      */
     public void accederShop() {
@@ -55,6 +38,7 @@ public class HomePage {
         wait.until(ExpectedConditions.elementToBeClickable(boutonShopBy));
         driver.findElement(boutonShopBy).click();
         Hooks.cliquer();
+        //Hooks.fermerPublicationGoogle();
         Hooks.setTemporisation(2000);
     }
 
@@ -66,6 +50,7 @@ public class HomePage {
         wait.until(ExpectedConditions.elementToBeClickable(boutonMyAccountBy));
         driver.findElement(boutonMyAccountBy).click();
         Hooks.cliquer();
+        //Hooks.fermerPublicationGoogle();
     }
 
     public void verifierPresenceIconePanier() {

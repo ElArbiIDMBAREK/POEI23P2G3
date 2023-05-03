@@ -30,7 +30,7 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                    | motDePasse  |
-		| poei23p2g3.16.03@gmail.com | aqzsedrftgy |
+		| poei23p2g3.16.07@gmail.com | aqzsedrftgy |
 	@TEST_POEI23P2G3-24 @TESTSET_POEI23P2G3-126 @TNR
 	Scenario: Valider que le pavé Register est présent sur l’espace My Account
 		Given je suis sur la page Home
@@ -61,7 +61,7 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                    | motDePasse     |
-		| poei23p2g3.34.03@gmail.com | Projet2Groupe3 |
+		| poei23p2g3.34.07@gmail.com | Projet2Groupe3 |
 	@TEST_POEI23P2G3-38 @TESTSET_POEI23P2G3-126 @TNR
 	Scenario Outline: Valider que le système détecte les doublons pour le mail et empêche la création de plusieurs comptes avec le même mail
 		Given je suis sur le espace My Account
@@ -77,7 +77,7 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                    | motDePasse     | message                                                                        |
-		| poei23p2g3.38.03@gmail.com | Projet2Groupe3 | Error: An account is already registered with your email address. Please login. |
+		| poei23p2g3.38.07@gmail.com | Projet2Groupe3 | Error: An account is already registered with your email address. Please login. |
 	@TEST_POEI23P2G3-108 @TESTSET_POEI23P2G3-126 @TNR
 	Scenario Outline: Valider que l'utilisateur peut saisir un mail et un mot de passe dans les champs appropriés
 		Given je suis sur le espace My Account
@@ -88,4 +88,4 @@ Feature: Création de compte
 		
 		Examples:
 		| mail                     | motDePasse    	|
-		| poei23p2g3.108.03@gmail.com | Projet2Groupe3 |
+		| poei23p2g3.108.07@gmail.com | Projet2Groupe3 |

@@ -35,6 +35,7 @@ public class ShopPage {
     By lienViewBasketBy = By.cssSelector(".added_to_cart");
     By boutonFiltreBy = By.cssSelector(".orderby");
     By boutonPanierBy = By.cssSelector("#wpmenucartli");
+    By titreProductCategoriesBy = By.cssSelector("#text-3 h4");
 
     public ShopPage(WebDriver driver) {
         this.driver = driver;
@@ -96,7 +97,7 @@ public class ShopPage {
 
     public void verifierPresenceBouton(int index) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
-        wait.until(ExpectedConditions.elementToBeClickable(boutonAddToBasketOuReadMoreBy));
+        wait.until(ExpectedConditions.presenceOfElementLocated(boutonAddToBasketOuReadMoreBy));
         List<WebElement> boutonsAddToBasketOuReadMore = driver.findElements(boutonAddToBasketOuReadMoreBy);
         Assert.assertTrue("Le bouton " + index + " n'est pas présent", boutonsAddToBasketOuReadMore.get(index).isEnabled());
     }
@@ -131,9 +132,11 @@ public class ShopPage {
     }
 
     public void choisirFiltre(String filtre) {
+        Hooks.dezoomer(5);
         WebElement boutonFiltre = driver.findElement(boutonFiltreBy);
         Select listeFiltre = new Select(boutonFiltre);
         listeFiltre.selectByVisibleText(filtre);
+        Hooks.zoomer(5);
     }
 
     public void articleFiltre(String filtre) {
@@ -161,6 +164,14 @@ public class ShopPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonPanierBy));
         driver.findElement(boutonPanierBy).click();
+    }
+
+    public void verifierArticlesFiltresTheme() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(titreProductCategoriesBy));
+        String titreTheme = driver.findElement(titreProductCategoriesBy).getText();
+        System.out.println("Theme : " + titreTheme);
+        Assert.assertTrue("Le filtre par thème n'existe pas", titreTheme.contains("CATEGORIES"));
     }
 
 }

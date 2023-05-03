@@ -42,7 +42,7 @@ public class ShopStepdefs {
     @When("je clique sur le bouton ADD TO BASKET")
     public void jeCliqueSurLeBoutonADDTOBASKET() {
         shopPage.cliquerBoutonAddToBasketOuReadMore(SIXIEME_ARTICLE);
-        shopPage.cliquerBoutonAddToBasketOuReadMore(SIXIEME_ARTICLE);
+        //shopPage.cliquerBoutonAddToBasketOuReadMore(SIXIEME_ARTICLE);
     }
 
     @And("je clique sur le lien View Basket")
@@ -94,5 +94,10 @@ public class ShopStepdefs {
     @And("je verifie que le lien View Basket est present")
     public void jeVerifieQueLeLienViewBasketEstPresent() {
         shopPage.verifierPresenceBoutonViewBasket();
+    }
+
+    @Then("je verifie que les articles sont tries par theme")
+    public void jeVerifieQueLesArticlesSontTriesParTheme() {
+        shopPage.verifierArticlesFiltresTheme();
     }
 }
