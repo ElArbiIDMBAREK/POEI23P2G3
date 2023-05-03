@@ -30,4 +30,19 @@ public class ProductStepdefs {
     public void jeVerifieQueLeArticleALeNombreDeExemplaireDisponible() {
         productPage.verifierPresenceQuantiteArticle();
     }
+
+    @And("je clique sur le bouton ADD TO BASKET dans article")
+    public void jeCliqueSurLeBoutonADDTOBASKETDansArticle() {
+        productPage.cliquerBoutonAddToBasket();
+    }
+
+    @Then("je verifie que le {string} se affiche dans article")
+    public void jeVerifieQueLeSeAfficheDansArticle(String message) {
+        productPage.verifierPresenceMessageAjoutArticle(message);
+    }
+
+    @And("je verifie que le bouton View Basket est present")
+    public void jeVerifieQueLeBoutonViewBasketEstPresent() {
+        productPage.verifierPresenceBoutonViewBasket();
+    }
 }

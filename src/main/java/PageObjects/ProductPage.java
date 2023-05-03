@@ -1,5 +1,6 @@
 package PageObjects;
 
+import Stepdefs.Hooks;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,9 +21,10 @@ public class ProductPage {
     By imageArticleBy = By.cssSelector(".product img");
     By prixArticleBy = By.cssSelector(".woocommerce-Price-amount");
     By descriptionArticleBy = By.cssSelector("#tab-description h2");
-    By quantiteArticleBy = By.cssSelector(".quantity");
     By stockArticleBy = By.cssSelector(".stock");
-
+    By boutonAddToCartBy = By.cssSelector(".single_add_to_cart_button");
+    By messageAjoutBy = By.cssSelector(".woocommerce-message");
+    By boutonViewBasketBy = By.cssSelector(".button.wc-forward");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -47,12 +49,27 @@ public class ProductPage {
     }
 
     public void verifierPresenceQuantiteArticle() {
-        /*if (driver.findElement(quantiteArticleBy).isDisplayed()) {
-            Assert.assertTrue("L'article n'a pas de quantité", driver.findElement(descriptionArticleBy).isDisplayed());
-        } else if (driver.findElement(stockArticleBy).isDisplayed()) {
-            Assert.assertTrue("L'article n'a pas de quantité", driver.findElement(stockArticleBy).isDisplayed());
-        }*/
         Assert.assertTrue("L'article n'a pas de quantité", driver.findElement(stockArticleBy).isDisplayed());
+    }
+
+    public void cliquerBoutonAddToBasket() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonAddToCartBy));
+        driver.findElement(boutonAddToCartBy).click();
+    }
+
+    public void verifierPresenceMessageAjoutArticle(String message) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageAjoutBy));
+        String messageAjout = driver.findElement(messageAjoutBy).getText();
+        System.out.println("message : " + messageAjout);
+        Assert.assertTrue("Aucun article n'est ajouter", messageAjout.contains(message));
+    }
+
+    public void verifierPresenceBoutonViewBasket() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(boutonViewBasketBy));
+        Assert.assertTrue("Le bouton View Basket n'est pas présent", driver.findElement(boutonViewBasketBy).isDisplayed());
     }
 
 }
