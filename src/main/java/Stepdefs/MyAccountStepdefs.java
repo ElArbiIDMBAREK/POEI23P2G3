@@ -1,9 +1,7 @@
 package Stepdefs;
 
-import PageObjects.DashboardPage;
 import PageObjects.HomePage;
 import PageObjects.MyAccountPage;
-import PageObjects.YopmailPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -22,13 +20,10 @@ public class MyAccountStepdefs {
     public void jeSuisSurLeEspaceMyAccount() {
         Hooks.accederHome();
         homePage.accederMyAccount();
-        //homePage.fermerPublicationGoogle();
     }
 
     @Then("je verifie que le pave Register est present")
     public void jeVerifieQueLePaveRegisterEstPresent() {
-        homePage.accederMyAccount();
-        //homePage.fermerPublicationGoogle();
         myAccountPage.verifierPresencePaveRegister();
     }
 

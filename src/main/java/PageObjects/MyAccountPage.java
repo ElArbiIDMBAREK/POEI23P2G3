@@ -49,26 +49,38 @@ public class MyAccountPage {
     }
 
     /**
-     * Vérifier la présence du pavé "Register"
+     * Vérifier la présence du pavé "Register" dans la page "My Account"
      */
     public void verifierPresencePaveRegister() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));                                      // Définition d'un "Wait"
-        wait.until(ExpectedConditions.presenceOfElementLocated(paveRegisterBy));                                                // Attendre que le pavé "Register" soit présent
-        Assert.assertTrue("Le pavé 'Regsiter' n'est pas présent", driver.findElement(paveRegisterBy).isDisplayed());    // Vérifier si le pavé "Register" est présent
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(paveRegisterBy));
+        Assert.assertTrue("Le pavé 'Regsiter' n'est pas présent", driver.findElement(paveRegisterBy).isDisplayed());
     }
 
+    /**
+     * Saisir l'adresse mail dans le champ Mail du pavé Register
+     * @param mail
+     */
     public void entrerMailRegister(String mail) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMailResgisterBy));
         driver.findElement(champMailResgisterBy).sendKeys(mail);
     }
 
+    /**
+     * Saisir le mot de passe dans le champ Mot de passe du pavé Register
+     * @param motDePasse
+     */
     public void entrerMotDePasseRegister(String motDePasse) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMotDePasseResgisterBy));
         driver.findElement(champMotDePasseResgisterBy).sendKeys(motDePasse);
     }
 
+    /**
+     * Vérifier
+     * @param mailAttendu
+     */
     public void verifierMailRegisterSaisi(String mailAttendu) {
         String mailActuel = driver.findElement(champMailResgisterBy).getAttribute("value");
         Assert.assertEquals("Le mail '" + mailAttendu + "' n'est pas saisi dans le champ", mailAttendu, mailActuel);
