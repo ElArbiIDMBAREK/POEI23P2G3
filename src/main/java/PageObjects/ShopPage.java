@@ -34,6 +34,7 @@ public class ShopPage {
     By boutonAddToBasketOuReadMoreBy = By.cssSelector(".button.product_type_simple");
     By lienViewBasketBy = By.cssSelector(".added_to_cart");
     By boutonFiltreBy = By.cssSelector(".orderby");
+    By boutonPanierBy = By.cssSelector("#wpmenucartli");
 
     public ShopPage(WebDriver driver) {
         this.driver = driver;
@@ -75,6 +76,7 @@ public class ShopPage {
     }
 
     public void cliquerArticle(int index) {
+        Hooks.scroll();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(imageArticleBy));
         List<WebElement> articles = driver.findElements(imageArticleBy);
@@ -100,24 +102,32 @@ public class ShopPage {
     }
 
     public void cliquerBoutonAddToBasketOuReadMore(int index) {
-        Hooks.setTemporisation(5000);
+        Hooks.dezoomer(5);
+        Hooks.scroll();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonAddToBasketOuReadMoreBy));
         List<WebElement> boutonsAddToBasketOuReadMore = driver.findElements(boutonAddToBasketOuReadMoreBy);
         boutonsAddToBasketOuReadMore.get(index).click();
+        Hooks.zoomer(5);
+    }
+
+    public void verifierPresenceBoutonViewBasket() {
+        Hooks.dezoomer(5);
+        Hooks.scroll();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(lienViewBasketBy));
+        Assert.assertTrue("Le bouton View Basket n'est pas présent", driver.findElement(lienViewBasketBy).isDisplayed());
+        Hooks.zoomer(5);
     }
 
     public void cliquerLienViewBasket() {
+        Hooks.dezoomer(5);
+        Hooks.scroll();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(lienViewBasketBy));
         WebElement lienViewBasket = driver.findElement(lienViewBasketBy);
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", lienViewBasket);
-        ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
-        //Hooks.scroll();
-        //Actions actions = new Actions(driver);
-        //actions.moveToElement(lienViewBasket);
-        //actions.perform();
         lienViewBasket.click();
+        Hooks.zoomer(5);
     }
 
     public void choisirFiltre(String filtre) {
@@ -145,6 +155,12 @@ public class ShopPage {
             etat = true;
         }
         Assert.assertTrue("Les articles ne sont pas : " + filtre, etat);
+    }
+
+    public void cliquerBoutonPanier() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonPanierBy));
+        driver.findElement(boutonPanierBy).click();
     }
 
 }

@@ -47,11 +47,12 @@ public class ProductPage {
     }
 
     public void verifierPresenceQuantiteArticle() {
-        if (driver.findElement(quantiteArticleBy).isDisplayed()) {
-            //Assert.assertTrue("L'article n'a pas de quantité", driver.findElement(descriptionArticleBy).isDisplayed());
+        /*if (driver.findElement(quantiteArticleBy).isDisplayed()) {
+            Assert.assertTrue("L'article n'a pas de quantité", driver.findElement(descriptionArticleBy).isDisplayed());
         } else if (driver.findElement(stockArticleBy).isDisplayed()) {
             Assert.assertTrue("L'article n'a pas de quantité", driver.findElement(stockArticleBy).isDisplayed());
-        }
+        }*/
+        Assert.assertTrue("L'article n'a pas de quantité", driver.findElement(stockArticleBy).isDisplayed());
     }
 
 }

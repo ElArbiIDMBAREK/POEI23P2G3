@@ -42,6 +42,7 @@ public class ShopStepdefs {
     @When("je clique sur le bouton ADD TO BASKET")
     public void jeCliqueSurLeBoutonADDTOBASKET() {
         shopPage.cliquerBoutonAddToBasketOuReadMore(SIXIEME_ARTICLE);
+        shopPage.cliquerBoutonAddToBasketOuReadMore(SIXIEME_ARTICLE);
     }
 
     @And("je clique sur le lien View Basket")
@@ -83,5 +84,15 @@ public class ShopStepdefs {
     @When("je clique sur le article {string}")
     public void jeCliqueSurLeArticle(String indexArticle) {
         shopPage.cliquerArticle(Integer.parseInt(indexArticle));
+    }
+
+    @And("je clique sur le bouton Panier")
+    public void jeCliqueSurLeBoutonPanier() {
+        shopPage.cliquerBoutonPanier();
+    }
+
+    @And("je verifie que le lien View Basket est present")
+    public void jeVerifieQueLeLienViewBasketEstPresent() {
+        shopPage.verifierPresenceBoutonViewBasket();
     }
 }
