@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-        features = "src/test/resources/features/9_ConsultationPanier.feature",
+        features = "src/test/resources/features",
         glue = "Stepdefs",
         tags = {"@TNR"},
         plugin = {
