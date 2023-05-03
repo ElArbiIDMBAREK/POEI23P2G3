@@ -29,10 +29,17 @@ public class BasketPage {
     By messageSuppressionBy = By.cssSelector(".woocommerce-message");
     By boutonProceedCheckoutBy = By.cssSelector(".checkout-button");
 
+    /**
+     * Constructeur
+     * @param driver pilote
+     */
     public BasketPage(WebDriver driver) {
         this.driver = driver;
     }
 
+    /**
+     * Vérifier que le titre Basket Totals est présent dans la page Basket
+     */
     public void verifierPresenceTitreBasket() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(titreBasketBy));
@@ -40,12 +47,18 @@ public class BasketPage {
         Assert.assertTrue("Le titre Basket n'apparait pas", titreBasket.contains("Basket"));
     }
 
+    /**
+     * Vérifier que le panier contient au moins un article dans la page Basket
+     */
     public void verifierPresenceArticlePanier() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(articlePanierBy));
         Assert.assertTrue("Aucun article n'est présent", driver.findElement(articlePanierBy).isDisplayed());
     }
 
+    /**
+     * Vérifier que le panier ne contient aucun article dans la page Basket
+     */
     public void verifierAbsenceArticlePanier() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(messageSuppressionBy));
@@ -53,24 +66,37 @@ public class BasketPage {
         Assert.assertTrue("Au moins, un article est présent", messageSuppression.contains("removed"));
     }
 
+    /**
+     * Cliquer sur le bouton X pour supprimer un article du panier dans la page Basket
+     */
     public void cliquerBoutonSupprimerArticle() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonSupprimerArticleBy));
         driver.findElement(boutonSupprimerArticleBy).click();
     }
 
+    /**
+     * Vérifier que la présence du prix unitaire de chaque article dans le panier de la page Basket
+     */
     public void verifierPresencePrixUnitaireArticle() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(prixUnitaireArticleBy));
         Assert.assertTrue("L'article n'a pas de prix unitaire", driver.findElement(prixUnitaireArticleBy).isDisplayed());
     }
 
+    /**
+     * Vérifier que la présence de la quantité de chaque article dans le panier de la page Basket
+     */
     public void verifierPresenceQuantiteArticle() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(quantiteArticleBy));
         Assert.assertTrue("Aucune quantité n'est présente", driver.findElement(quantiteArticleBy).isDisplayed());
     }
 
+    /**
+     * Changer la quantité de l'article dans le panier
+     * @param quantite quantité de l'article dans le panier
+     */
     public void changerQuantiteArticle(String quantite) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champQuantiteBy));
@@ -79,19 +105,29 @@ public class BasketPage {
         Hooks.setTemporisation(5000);
     }
 
-    public void verifierQuantiteArticle(String quantiteAttendu) {
+    /**
+     * Comparer la quantité de l'article dans le panier
+     * @param quantiteAttendue quantité attendue
+     */
+    public void verifierQuantiteArticle(String quantiteAttendue) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champQuantiteBy));
         String quantiteActuel = driver.findElement(champQuantiteBy).getAttribute("value");
-        Assert.assertTrue("La quantité n'est pas " + quantiteAttendu + ", elle est " + quantiteActuel, quantiteAttendu.equals(quantiteActuel));
+        Assert.assertTrue("La quantité n'est pas " + quantiteAttendue + ", elle est " + quantiteActuel, quantiteAttendue.equals(quantiteActuel));
     }
 
+    /**
+     * Vérifier que la présence du prix total de chaque article dans le panier de la page Basket
+     */
     public void verifierPresencePrixTotalArticle() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(prixTotalArticleBy));
         Assert.assertTrue("L'article n'a pas de prix total", driver.findElement(prixTotalArticleBy).isDisplayed());
     }
 
+    /**
+     * Cliquer sur le bouton Proceed To Checkout pour aller sur la page Checkout
+     */
     public void cliquerBoutonProceedToCheckout() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonProceedCheckoutBy));

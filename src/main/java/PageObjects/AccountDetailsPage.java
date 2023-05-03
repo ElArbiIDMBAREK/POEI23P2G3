@@ -26,10 +26,18 @@ public class AccountDetailsPage {
     By champConfirmationMotDePasseBy = By.cssSelector("#password_2");
     By boutonSaveChangesBy = By.cssSelector("[name='save_account_details']");
 
+    /**
+     * Constructeur
+     * @param driver pilote
+     */
     public AccountDetailsPage(WebDriver driver) {
         this.driver = driver;
     }
 
+    /**
+     * Vérifier si le prénom est saisi dans le champs Prenom de la page Account Details
+     * @param prenomAttendu prénom de l'utilisateur
+     */
     public void verifierPrenomSaisi(String prenomAttendu) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champPrenomBy));
@@ -37,6 +45,10 @@ public class AccountDetailsPage {
         Assert.assertEquals("Le prénom '" + prenomAttendu + "' n'est pas saisi dans le champ", prenomAttendu, prenomActuel);
     }
 
+    /**
+     * Vérifier si le nom est saisi dans le champs Nom de la page Account Details
+     * @param nomAttendu nom de l'utilisateur
+     */
     public void verifierNomSaisi(String nomAttendu) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champNomBy));
@@ -44,6 +56,10 @@ public class AccountDetailsPage {
         Assert.assertEquals("Le nom '" + nomAttendu + "' n'est pas saisi dans le champ", nomAttendu, nomActuel);
     }
 
+    /**
+     * Vérifier si le login est saisi dans le champs Login de la page Account Details
+     * @param loginAttendu login du compte
+     */
     public void verifierLoginSaisi(String loginAttendu) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champLoginBy));
@@ -51,24 +67,39 @@ public class AccountDetailsPage {
         Assert.assertEquals("Le login '" + loginAttendu + "' n'est pas saisi dans le champ", loginAttendu, loginActuel);
     }
 
+    /**
+     * Saisir l'actuel mot de passe dans le champ Current Password de la pasge Account Details
+     * @param motDePasse actuel mot de passe du compte
+     */
     public void entrerMotDePasse(String motDePasse) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMotDePasseBy));
         driver.findElement(champMotDePasseBy).sendKeys(motDePasse);
     }
 
+    /**
+     * Saisir le nouveau mot de passe dans le champ New Password de la page Account Details
+     * @param motDePasse nouveau mot de passe du compte
+     */
     public void entrerNouveauMotDePasse(String motDePasse) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champNouveauMotDePasseBy));
         driver.findElement(champNouveauMotDePasseBy).sendKeys(motDePasse);
     }
 
+    /**
+     * Sasir la confirmation du nouveau mot de passe dans le champs Confirmation Password de la page Account Details
+     * @param motDePasse nouveau mot de passe
+     */
     public void entrerConfirmationMotDePasse(String motDePasse) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champConfirmationMotDePasseBy));
         driver.findElement(champConfirmationMotDePasseBy).sendKeys(motDePasse);
     }
 
+    /**
+     * Cliquer sur le bouton Save Changes pour enregistrer les modification des informations du compte
+     */
     public void cliquerBoutonSaveChanges() {
         Hooks.dezoomer(5);
         Hooks.scroll();
@@ -78,6 +109,10 @@ public class AccountDetailsPage {
         Hooks.zoomer(5);
     }
 
+    /**
+     * Vérifier que le mot de passe actuel est saisi dans le champ Current Password de la page Account Details
+     * @param motDePasseAttendu actuel mot de passe du compte
+     */
     public void verifierMotDePasseSaisi(String motDePasseAttendu) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMotDePasseBy));
@@ -85,6 +120,10 @@ public class AccountDetailsPage {
         Assert.assertEquals("Le mot de passe n'est pas saisi dans le champ", motDePasseAttendu, motDePasseActuel);
     }
 
+    /**
+     * Vérifier que le nouveau mote de passe est saisi dans le champ New Password de la page Account Details
+     * @param nouveauMotDePasseAttendu nouveau mot de passe du compte
+     */
     public void verifierNouveauMotDePasseSaisi(String nouveauMotDePasseAttendu) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champNouveauMotDePasseBy));
@@ -92,6 +131,10 @@ public class AccountDetailsPage {
         Assert.assertEquals("Le nouveau mot de passe n'est pas saisi dans le champ", nouveauMotDePasseAttendu, nouveauMotDePasseActuel);
     }
 
+    /**
+     * Vérifier que la confirmation du mote de passe est saisi dans le champ Confirmation Password de la page Account Details
+     * @param nouveauMotDePasseAttendu nouveau mot de passe du compte
+     */
     public void verifierConfirmationMotDePasseSaisi(String nouveauMotDePasseAttendu) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champConfirmationMotDePasseBy));
