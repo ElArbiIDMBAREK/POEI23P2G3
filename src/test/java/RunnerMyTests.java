@@ -12,9 +12,9 @@ import java.security.NoSuchAlgorithmException;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-        features = "src/test/resources/features/1_CreationCompte.feature",
+        features = "src/test/resources/features/7_AjoutArticlesPanier.feature",
         glue = "Stepdefs",
-        tags = {"@TNR"},
+        tags = {"@TEST_POEI23P2G3-83","@TNR"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-reports",

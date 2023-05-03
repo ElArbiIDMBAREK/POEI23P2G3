@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
@@ -23,6 +24,13 @@ public class Hooks {
 
     static final String URL = "https://practice.automationtesting.in/";
 
+    /**
+     * Définition des Sélecteurs
+     */
+    static By deuxiemeIFramePublicationGoogle = By.cssSelector("#aswift_7");
+    static By troisiemeIFramePublicationGoogle = By.cssSelector("#ad_iframe");
+    static By boutonCloseBy =By.cssSelector("#dismiss-button");
+
     @Before
     public void installation() {
         WebDriverManager.chromedriver().setup();
@@ -32,6 +40,18 @@ public class Hooks {
 
     public static void accederHome() {
         driver.get(URL);
+    }
+
+    /**
+     * Fermer le pop-up des publicités de Google
+     */
+    public static void fermerPublicationGoogle() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(deuxiemeIFramePublicationGoogle));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(troisiemeIFramePublicationGoogle));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonCloseBy));
+        driver.findElement(boutonCloseBy).click();
+        driver.switchTo().defaultContent();
     }
 
     /**
@@ -52,6 +72,7 @@ public class Hooks {
 
     public static void scroll() {
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.END);
+        setTemporisation(1000);
     }
 
     public static void zoomer(int taille) {
