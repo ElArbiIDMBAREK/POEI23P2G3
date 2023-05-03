@@ -44,6 +44,7 @@ public class HomePage {
         driver.switchTo().frame(driver.findElement(troisiemeIFramePublicationGoogle));
         driver.findElement(boutonCloseBy).click();
         driver.switchTo().defaultContent();
+        Hooks.setTemporisation(1000);
     }
 
     /**

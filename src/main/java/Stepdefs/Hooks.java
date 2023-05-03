@@ -46,7 +46,7 @@ public class Hooks {
         } catch (AWTException e) {
             throw new RuntimeException(e);
         }
-        robot.mouseMove(-400,0);
+        robot.mouseMove(50,50);
         actions.click().build().perform();
     }
 

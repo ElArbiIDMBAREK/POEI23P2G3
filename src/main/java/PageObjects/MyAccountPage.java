@@ -35,6 +35,10 @@ public class MyAccountPage {
     By champMotDePasseLoginBy = By.cssSelector("#password");
     By caseRememberMeBy = By.cssSelector("#rememberme");
     By boutonLoginBy = By.cssSelector("[name='login']");
+    By boutonLostPassBy = By.cssSelector("[href='https://practice.automationtesting.in/my-account/lost-password/']");
+    By champEmailLostPassBy = By.cssSelector("#user_login");
+    By boutonLostPasswordBy = By.cssSelector("input.woocommerce-Button.button");
+    By messageLostYourPasswordBy = By.cssSelector(".woocommerce-ResetPassword");
 
     /**
      * Constructeur de la page d'accueil "Home Page"
@@ -45,26 +49,38 @@ public class MyAccountPage {
     }
 
     /**
-     * Vérifier la présence du pavé "Register"
+     * Vérifier la présence du pavé "Register" dans la page "My Account"
      */
     public void verifierPresencePaveRegister() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));                                      // Définition d'un "Wait"
-        wait.until(ExpectedConditions.presenceOfElementLocated(paveRegisterBy));                                                // Attendre que le pavé "Register" soit présent
-        Assert.assertTrue("Le pavé 'Regsiter' n'est pas présent", driver.findElement(paveRegisterBy).isDisplayed());    // Vérifier si le pavé "Register" est présent
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(paveRegisterBy));
+        Assert.assertTrue("Le pavé 'Regsiter' n'est pas présent", driver.findElement(paveRegisterBy).isDisplayed());
     }
 
+    /**
+     * Saisir l'adresse mail dans le champ Mail du pavé Register
+     * @param mail
+     */
     public void entrerMailRegister(String mail) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMailResgisterBy));
         driver.findElement(champMailResgisterBy).sendKeys(mail);
     }
 
+    /**
+     * Saisir le mot de passe dans le champ Mot de passe du pavé Register
+     * @param motDePasse
+     */
     public void entrerMotDePasseRegister(String motDePasse) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.presenceOfElementLocated(champMotDePasseResgisterBy));
         driver.findElement(champMotDePasseResgisterBy).sendKeys(motDePasse);
     }
 
+    /**
+     * Vérifier
+     * @param mailAttendu
+     */
     public void verifierMailRegisterSaisi(String mailAttendu) {
         String mailActuel = driver.findElement(champMailResgisterBy).getAttribute("value");
         Assert.assertEquals("Le mail '" + mailAttendu + "' n'est pas saisi dans le champ", mailAttendu, mailActuel);
@@ -136,6 +152,35 @@ public class MyAccountPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonLoginBy));
         driver.findElement(boutonLoginBy).click();
+    }
+
+    public void cliquerLostPassword() {
+        Hooks.cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonLostPassBy));
+        driver.findElement(boutonLostPassBy).click();
+    }
+
+    public void verifierPresenceMessageLostPassword() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageLostYourPasswordBy));
+        String messageLostPassword = driver.findElement(messageLostYourPasswordBy).getText();
+        Assert.assertTrue("Le message 'Lost your password?' n'apparaît pas", messageLostPassword.contains("Lost your password"));
+
+    }
+
+    public void saisirAdresseMail(String email) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(champEmailLostPassBy));
+        driver.findElement(champEmailLostPassBy).sendKeys(email);
+    }
+
+    public void cliquerBoutonResetPass() {
+        Hooks.cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonLostPasswordBy));
+        driver.findElement(boutonLostPasswordBy).click();
+
     }
 
 }
