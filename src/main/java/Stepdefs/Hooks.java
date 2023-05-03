@@ -46,12 +46,44 @@ public class Hooks {
         } catch (AWTException e) {
             throw new RuntimeException(e);
         }
-        robot.mouseMove(50,50);
+        robot.mouseMove(-400,0);
         actions.click().build().perform();
     }
 
     public static void scroll() {
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.END);
+    }
+
+    public static void zoomer(int taille) {
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < taille; i++) {
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_ADD);
+            robot.keyRelease(KeyEvent.VK_ADD);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
+        setTemporisation(2000);
+    }
+
+    public static void dezoomer(int taille) {
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < taille; i++) {
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_SUBTRACT);
+            robot.keyRelease(KeyEvent.VK_SUBTRACT);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
+        setTemporisation(2000);
     }
 
     public static void setTemporisation(int time) {

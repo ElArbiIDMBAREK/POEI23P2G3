@@ -31,21 +31,23 @@ Feature: Détails des articles
 		
 		Examples:
 		| indexArticle |
-		| 2            |
-		| 7            |
+		| 1            |
 		| 4            |
+
 	@TEST_POEI23P2G3-20 @TNR
 	Scenario: Valider que le bouton ADD TO BASKET permet d’ajouter l’article au panier
 		Given je suis sur la page Shop
 		When je clique sur le bouton ADD TO BASKET
 		And je clique sur le bouton Panier
 		Then je verifie que un article est dans le panier
+
 	@TEST_POEI23P2G3-21 @TNR
 	Scenario: Valider la présence d’un champ qui permet à l’utilisateur d'indiquer le nombre d’exemplaire d’articles voulu
 		Given je suis sur la page Shop
 		When je clique sur le bouton ADD TO BASKET
 		And je clique sur le bouton Panier
 		Then je verifie que un champ quantite est present
+
 	@TEST_POEI23P2G3-124 @TNR
 	Scenario Outline: Valider qu'à chaque ajout, un message “'libellé' has been added to your basket." et un bouton "VIEW BASKET" permettant de se rediriger dans l'espace panier, apparaissent au-dessus l'article
 		Given je suis sur la page Shop
