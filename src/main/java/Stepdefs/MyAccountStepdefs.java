@@ -3,6 +3,7 @@ package Stepdefs;
 import PageObjects.DashboardPage;
 import PageObjects.HomePage;
 import PageObjects.MyAccountPage;
+import PageObjects.YopmailPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -134,4 +135,25 @@ public class MyAccountStepdefs {
     public void jeVerifieQueLeEstSaisi(String login) {
         myAccountPage.verifierMailLoginSaisi(login);
     }
+
+    @When("je clique sur le lien lost your password")
+    public void jeCliqueSurLeLienLostYourPassword() {
+        myAccountPage.cliquerLostPassword();
+    }
+
+    @Then("je verifie que je suis rediriger vers la page lost password")
+    public void jeVerifieQueJeSuisRedirigerVersLaPageLostPassword() {
+        myAccountPage.verifierPresenceMessageLostPassword();
+    }
+
+    @And("je saisis mon {string}")
+    public void jeSaisisMon(String email) {
+        myAccountPage.saisirAdresseMail(email);
+    }
+
+    @And("je clique sur le bouton reset password")
+    public void jeCliqueSurLeBoutonResetPassword() {
+        myAccountPage.cliquerBoutonResetPass();
+    }
+
 }

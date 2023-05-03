@@ -35,6 +35,10 @@ public class MyAccountPage {
     By champMotDePasseLoginBy = By.cssSelector("#password");
     By caseRememberMeBy = By.cssSelector("#rememberme");
     By boutonLoginBy = By.cssSelector("[name='login']");
+    By boutonLostPassBy = By.cssSelector("[href='https://practice.automationtesting.in/my-account/lost-password/']");
+    By champEmailLostPassBy = By.cssSelector("#user_login");
+    By boutonLostPasswordBy = By.cssSelector("input.woocommerce-Button.button");
+    By messageLostYourPasswordBy = By.cssSelector(".woocommerce-ResetPassword");
 
     /**
      * Constructeur de la page d'accueil "Home Page"
@@ -136,6 +140,35 @@ public class MyAccountPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
         wait.until(ExpectedConditions.elementToBeClickable(boutonLoginBy));
         driver.findElement(boutonLoginBy).click();
+    }
+
+    public void cliquerLostPassword() {
+        Hooks.cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonLostPassBy));
+        driver.findElement(boutonLostPassBy).click();
+    }
+
+    public void verifierPresenceMessageLostPassword() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(messageLostYourPasswordBy));
+        String messageLostPassword = driver.findElement(messageLostYourPasswordBy).getText();
+        Assert.assertTrue("Le message 'Lost your password?' n'apparaît pas", messageLostPassword.contains("Lost your password"));
+
+    }
+
+    public void saisirAdresseMail(String email) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.presenceOfElementLocated(champEmailLostPassBy));
+        driver.findElement(champEmailLostPassBy).sendKeys(email);
+    }
+
+    public void cliquerBoutonResetPass() {
+        Hooks.cliquer();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TEMPS_ATTENTE));
+        wait.until(ExpectedConditions.elementToBeClickable(boutonLostPasswordBy));
+        driver.findElement(boutonLostPasswordBy).click();
+
     }
 
 }

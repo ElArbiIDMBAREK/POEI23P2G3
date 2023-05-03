@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 @CucumberOptions(
         features = "src/test/resources/features/",
         glue = "Stepdefs",
-        tags = {"@TEST_POEI23P2G3-32","@TNR"},
+        tags = {"@TEST_POEI23P2G3-62","@TNR"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-reports",
