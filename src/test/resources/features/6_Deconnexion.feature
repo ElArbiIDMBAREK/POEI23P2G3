@@ -16,7 +16,7 @@ Feature: Déconnexion
 	#
 	#*RG1* : Dans l'espace "My Account" un lien "Logout" permet la déconnexion, la page Account affiche les pavé de "Login" et de "Register"
 
-	@TEST_POEI23P2G3-60 @TNR
+	@TEST_POEI23P2G3-60 @TESTSET_POEI23P2G3-127 @TNR
 	Scenario Outline: Valider que l’utilisateur peut se déconnecter via le lien “Logout”
 		Given je suis sur le espace My Account
 		And je me connecte avec le "<login>" et le "<motDePasse>"
