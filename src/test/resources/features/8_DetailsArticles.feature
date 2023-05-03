@@ -20,7 +20,7 @@ Feature: Détails des articles
 	#
 	#*RG3* : A chaque ajout, un message “'libellé' has been added to your basket." et un bouton "VIEW BASKET" permettant de se rediriger dans l'espace panier, apparaissent au-dessus l'article
 
-	@TEST_POEI23P2G3-18 @TNR
+	@TEST_POEI23P2G3-18 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario Outline: Valider que les articles sont présenté par une photographie, un prix, un details descriptif et le nombre d’exemplaires encore disponible
 		Given je suis sur la page Shop
 		When je clique sur le article "<indexArticle>"
@@ -33,28 +33,26 @@ Feature: Détails des articles
 		| indexArticle |
 		| 1            |
 		| 4            |
-
-	@TEST_POEI23P2G3-20 @TNR
+	@TEST_POEI23P2G3-20 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario: Valider que le bouton ADD TO BASKET permet d’ajouter l’article au panier
 		Given je suis sur la page Shop
 		When je clique sur le bouton ADD TO BASKET
 		And je clique sur le bouton Panier
 		Then je verifie que un article est dans le panier
-
-	@TEST_POEI23P2G3-21 @TNR
+	@TEST_POEI23P2G3-21 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario: Valider la présence d’un champ qui permet à l’utilisateur d'indiquer le nombre d’exemplaire d’articles voulu
 		Given je suis sur la page Shop
 		When je clique sur le bouton ADD TO BASKET
 		And je clique sur le bouton Panier
 		Then je verifie que un champ quantite est present
-
-	@TEST_POEI23P2G3-124 @TNR
+	@TEST_POEI23P2G3-124 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario Outline: Valider qu'à chaque ajout, un message “'libellé' has been added to your basket." et un bouton "VIEW BASKET" permettant de se rediriger dans l'espace panier, apparaissent au-dessus l'article
 		Given je suis sur la page Shop
-		When je clique sur le bouton ADD TO BASKET
-		Then je verifie que le "<message>" se affiche
-		And je verifie que le lien View Basket est present
-		
+		When je clique sur le article "<index>"
+		And je clique sur le bouton ADD TO BASKET dans article
+		Then je verifie que le "<message>" se affiche dans article
+		And je verifie que le bouton View Basket est present
+
 		Examples:
-		| message                        |
-		| has been added to your basket. |
+			| index | message                        |
+			| 5     | has been added to your basket. |

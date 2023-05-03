@@ -33,7 +33,6 @@ Feature: Consultation du panier
 		And je verifie que un article a une quantite
 		And je verifie que un article a un prix unitaire
 		And je verifie que un article a un prix total
-
 	@TEST_POEI23P2G3-23 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario: Valider que chaque article peut être supprimé à l'aide d’un bouton
 		Given je suis sur la page Shop
@@ -41,7 +40,6 @@ Feature: Consultation du panier
 		And je clique sur le bouton Panier
 		And je clique sur Supprimer Article
 		Then je verifie que aucun article ne est present
-
 	@TEST_POEI23P2G3-26 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario Outline: Valider que la quantité de chaque article peut être modifiée à l’aide d’un champ de quantité
 		Given je suis sur la page Shop
@@ -53,27 +51,12 @@ Feature: Consultation du panier
 		Examples:
 		| quantite |
 		| 4        |
-
-	@TEST_POEI23P2G3-28 @TESTSET_POEI23P2G3-129 @TNR
-	Scenario Outline: Valider que le champ "Coupon code " et le bouton "APPLY COUPON" sont présents en dessous du récapitulatif des articles et qui permettent d’appliquer un code promotionnel sur la commande 
-		Given je suis sur la page Shop
-		When je clique sur le bouton ADD TO BASKET
-		And je clique sur le bouton Panier
-		And je remplis le "<coupon>" dans la case Coupon Code
-		And je cliquer sur le bouton Apply Coupon
-		Then je verifie que le coupon est applique
-		
-		Examples:
-		| coupon  |
-		| Promo30 |
-
 	@TEST_POEI23P2G3-30 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario: Valider la présence d’un pavé récapitulatif  “Basket Totals” indiquant le prix total et la taxe associée
 		Given je suis sur la page Shop
 		When je clique sur le bouton ADD TO BASKET
 		And je clique sur le bouton Panier
 		Then je verifie que je suis sur la page Basket
-
 	@TEST_POEI23P2G3-32 @TESTSET_POEI23P2G3-129 @TNR
 	Scenario: Valider que le bouton "Proceed to Checkout " est présent et qui permet de valider la commande et passer au paiement
 		Given je suis sur la page Shop

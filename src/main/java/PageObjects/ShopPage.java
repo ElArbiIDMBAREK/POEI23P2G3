@@ -35,7 +35,7 @@ public class ShopPage {
     By lienViewBasketBy = By.cssSelector(".added_to_cart");
     By boutonFiltreBy = By.cssSelector(".orderby");
     By boutonPanierBy = By.cssSelector("#wpmenucartli");
-    By titreProductCategoriesBy = By.cssSelector("#text-3 h4");
+    By titreProductCategoriesBy = By.cssSelector("#woocommerce_product_categories-2 h4");
 
     public ShopPage(WebDriver driver) {
         this.driver = driver;
@@ -132,11 +132,9 @@ public class ShopPage {
     }
 
     public void choisirFiltre(String filtre) {
-        Hooks.dezoomer(5);
         WebElement boutonFiltre = driver.findElement(boutonFiltreBy);
         Select listeFiltre = new Select(boutonFiltre);
         listeFiltre.selectByVisibleText(filtre);
-        Hooks.zoomer(5);
     }
 
     public void articleFiltre(String filtre) {

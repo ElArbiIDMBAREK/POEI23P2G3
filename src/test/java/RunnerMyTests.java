@@ -12,9 +12,9 @@ import java.security.NoSuchAlgorithmException;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-        features = "src/test/resources/features/7_AjoutArticlesPanier.feature",
+        features = "src/test/resources/features/9_ConsultationPanier.feature",
         glue = "Stepdefs",
-        tags = {"@TEST_POEI23P2G3-83","@TNR"},
+        tags = {"@TNR"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-reports",
@@ -25,6 +25,6 @@ import java.security.NoSuchAlgorithmException;
 public class RunnerMyTests {
         @AfterClass
         public static void importToXray() throws IOException, NoSuchAlgorithmException, KeyStoreException, InterruptedException, KeyManagementException {
-                //IntegrationWithXray.importToXray();
+                IntegrationWithXray.importToXray();
         }
 }
